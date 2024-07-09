@@ -30,8 +30,19 @@ cd ScriptSculptor
 3) Run the script using the appropriate interpreter:
 
 ```
+./script.cmd
 bash script.sh
 python script.py
+```
+
+4) Instead of clonning the repository, you can also download the script directly from the repository by using the following command:
+
+```
+curl -O https://raw.githubusercontent.com/karthik558/ScriptSculptor/main/Directory/script.sh
+```
+
+```
+example: curl -L -o QuickNet.cmd https://raw.githubusercontent.com/karthik558/ScriptSculptor/main/batchSpace/QuickNet.cmd
 ```
 
 ## Contributing
