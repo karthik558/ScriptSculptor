@@ -1,27 +1,35 @@
 import os
 import time
 
-# Automation Script Information [ASCII Art]
+# Define variables
+developer = "KARTHIK LAL"
+email = "dev@karthiklal.in"
+website = "https://karthiklal.in"
+version = "2.0.0"
+date = "2023-01-26"
+project = "IP Camera Status Checker"
+purpose = "To check the status of IP cameras in the network"
 
-def display_banner():
-    banner =  "██╗  ██╗ █████╗ ██████╗ ████████╗██╗  ██╗██╗██╗  ██╗     ██╗      █████╗ ██╗\n"
-    banner += "██║ ██╔╝██╔══██╗██╔══██╗╚══██╔══╝██║  ██║██║██║ ██╔╝     ██║     ██╔══██╗██║\n"
-    banner += "█████╔╝ ███████║██████╔╝   ██║   ███████║██║█████╔╝█████╗██║     ███████║██║\n"
-    banner += "██╔═██╗ ██╔══██║██╔══██╗   ██║   ██╔══██║██║██╔═██╗╚════╝██║     ██╔══██║██║\n"
-    banner += "██║  ██╗██║  ██║██║  ██║   ██║   ██║  ██║██║██║  ██╗     ███████╗██║  ██║███████╗\n"
-    banner += "╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝\n"
+# Define title for the console
+os.system("title CamDownChecker - %s" %developer)
+
+# Automation Script Information [ASCII Art]
+def display_banner():    
+    banner =  "██████╗ █████╗ ███╗   ███╗      ██████╗  ██████╗ ██╗    ██╗███╗   ██╗       ██████╗██╗  ██╗███████╗ ██████╗██╗  ██╗███████╗██████╗ \n"
+    banner += "██╔════╝██╔══██╗████╗ ████║      ██╔══██╗██╔═══██╗██║    ██║████╗  ██║      ██╔════╝██║  ██║██╔════╝██╔════╝██║ ██╔╝██╔════╝██╔══██╗\n"
+    banner += "██║     ███████║██╔████╔██║█████╗██║  ██║██║   ██║██║ █╗ ██║██╔██╗ ██║█████╗██║     ███████║█████╗  ██║     █████╔╝ █████╗  ██████╔╝\n"
+    banner += "██║     ██╔══██║██║╚██╔╝██║╚════╝██║  ██║██║   ██║██║███╗██║██║╚██╗██║╚════╝██║     ██╔══██║██╔══╝  ██║     ██╔═██╗ ██╔══╝  ██╔══██╗\n"
+    banner += "╚██████╗██║  ██║██║ ╚═╝ ██║      ██████╔╝╚██████╔╝╚███╔███╔╝██║ ╚████║      ╚██████╗██║  ██║███████╗╚██████╗██║  ██╗███████╗██║  ██║\n"
+    banner += "╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝      ╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝       ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝\n"
     print(banner)
 
-
-display_banner()
-
 # Terminal header settings and information
-os.system('color 0A')
-print("Developer  :   KARTHIK LAL (https://karthiklal.in)")
-print('Version     :   1.2 STABLE')
-print("Created Date:   2023-01-26")
-print('Project     :   IP Camera Status Checker')
-print('Purpose     :   To check the status of IP cameras in the network')
+os.system('color 1F')
+print("Developer    :   %s" %developer)
+print('Version      :   %s' %version)
+print("Created Date :   %s" %date)
+print('Project      :   %s' %project)
+print('Purpose      :   %s' %purpose)
 print("")
 
 # If press any key to continue
@@ -39,12 +47,12 @@ with open(file_name, 'w') as f:
     print('', file=f)
 
 # Ping Test
-for i in range(15, 61):
-    response = os.system(f'ping -n 5 192.168.4.{i} | find "TTL="')
+for i in range(1, 255):
+    response = os.system(f'ping -n 3 10.10.2.{i} | find "TTL="')
     if response != 0:
         with open(file_name, 'a') as f:
             f.write(
-                f"The IP address 192.168.4.{i} is currently unreachable.\n")
+                f"The IP address 10.10.2.{i} is currently unreachable.\n")
         time.sleep(2)
 
 # End of Script
@@ -59,8 +67,20 @@ print(f'Check the file {file_name} for the results.')
 time.sleep(2)
 print()
 
-# Exit from script
+# Exit from the script
 os.system("cls")
-message = "Thank you for using the KARTHIK-LAL (cam-host-checker) script.\nHave a great day ahead!\n"
-print(message)
+print(f'=======================================')
+print(f'THANK YOU FOR USING CAMERA DOWN CHECKER')
+print(f'=======================================')
+print()
+print(f'DEVELOPER: %s ' %developer)
+print(f'EMAIL: %s ' %email)
+print(f'WEBSITE: %s ' %website)
+print(f'VERSION: %s ' %version)
+print(f'CREATED DATE: %s ' %date)
+print()
+print(f'Copying and distribution of this file, with or without modification, are permitted in any medium without royalty provided the copyright notice and this notice are preserved.')
+print(f'Tools are provided as is without warranty of any kind and the author is not responsible for any damage caused by the use of these tools.')
+print(f'Copyright © %s %s' %(date, developer))
+print()
 input("Press Enter to exit...")
