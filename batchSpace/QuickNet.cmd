@@ -17,7 +17,7 @@ set "author-website=https://karthiklal.in"
 set "project=QuickNet"
 set "version=2.0.0"
 set "created-date=2022-08-15"
-set "copy-right=(C) 2022-2023 %developer%"
+set "copy-right=(C) 2022-2024 %developer%"
 
 @REM  .d88888b.           d8b          888      888b    888          888    
 @REM d88P" "Y88b          Y8P          888      8888b   888          888    
@@ -74,7 +74,13 @@ echo Select (1) for Using Internet on Home and (2) for Using Internet on Office
 echo.
 set /p ip_type=Type: 1/2:
 
-@REM If user selects 1, run this command to change ip_to_static
+@REM Input validation for user selection
+if %ip_type% neq 1 if %ip_type% neq 2 (
+    echo Invalid selection. Please enter 1 or 2.
+    goto START_SCRIPT
+)
+
+@REM If user selects 1, run this command to change to dynamic IP
 if %ip_type%==1 (
 	netsh interface ipv4 set address name="%interface_name%" source=dhcp
 	echo Done setting IP address to dynamic...
@@ -83,12 +89,34 @@ if %ip_type%==1 (
 	echo Now you can use internet on Home Network!
 	goto END_SCRIPT
 ) else (
-@REM If user selects 2, run this command to change ip_to_dynamic
+@REM If user selects 2, run this command to change to static IP
 	netsh interface ipv4 set address name="%interface_name%" static %ip_to_static% %subnet_mask% %default_gateway%
 	echo Done setting IP address to static...
-@REM netsh interface ip set dns name="%interface_name%" static "%dns_server%" primary
-@REM netsh interface ip add dns name="%interface_name%" "%alt_dns_server%" index=2
-@REM echo Done setting DNS server to %dns_server% and %alt_dns_server%
+
+	@REM Set primary DNS server
+	netsh interface ip set dns name="%interface_name%" static "%dns_server%" primary
+	if %errorlevel% neq 0 (
+	    echo Failed to set primary DNS server. Please check your settings.
+	) else (
+	    echo Primary DNS server set to %dns_server%.
+	)
+
+	@REM Set secondary DNS server
+	netsh interface ip add dns name="%interface_name%" "%alt_dns_server%" index=2
+	if %errorlevel% neq 0 (
+	    echo Failed to set secondary DNS server. Please check your settings.
+	) else (
+	    echo Secondary DNS server set to %alt_dns_server%.
+	)
+
+	@REM Flush DNS cache
+	ipconfig /flushdns
+	echo DNS cache flushed.
+
+	@REM Display current DNS settings
+	echo Current DNS settings:
+	netsh interface ip show dns name="%interface_name%"
+
 	timeout /t 1
 	cls
 	echo Now you can use internet on Office Network!
